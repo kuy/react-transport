@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import {
-  INCREMENT
+  INCREMENT, ADD
 } from './actions';
 
 const initial = {
   app: {
-    count: 0
+    count: 0,
+    notification: []
   }
 };
 
@@ -13,6 +14,9 @@ const handlers = {
   app: {
     [INCREMENT]: (state, action) => {
       return { ...state, count: state.count + 1 };
+    },
+    [ADD]: (state, action) => {
+      return { ...state, notification: [`Notification #${state.notification.length + 1}`, ...state.notification] };
     },
   }
 };
