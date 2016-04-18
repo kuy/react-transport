@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './phase1/src/index.js',
   module: {
     loaders: [{
       test: /\.js$/,

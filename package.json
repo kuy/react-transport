@@ -6,8 +6,8 @@
   },
   "homepage": "https://github.com/kuy/hypha",
   "scripts": {
-    "start": "./node_modules/.bin/webpack-dev-server --progress --color --content-base public/",
-    "build": "./node_modules/.bin/webpack"
+    "phase1": "./node_modules/.bin/webpack-dev-server --config phase1/webpack.config.js --progress --color --content-base public/",
+    "phase2": "./node_modules/.bin/webpack --config phase2/webpack.config.js"
   },
   "authors": [
     "Yuki Kodama <endflow.net@gmail.com>"
