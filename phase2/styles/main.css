@@ -1,0 +1,50 @@
+.inboxsdk__button_icon, .inboxsdk__button_iconImg {
+    width: 51px !important;
+}
+
+.inboxsdk__sidebar .insight_reply_status, .inboxsdk__sidebar .insight_inner_group {
+    padding: 0 0 8px 8px;
+}
+
+.inboxsdk__sidebar .insight_reply_status h2 {
+    color: gray;
+    font-size: 1.2em;
+    margin: .8em 0 .4em;
+}
+
+.inboxsdk__sidebar .insight_reply_status h2 em {
+    color: black;
+    font-size: 2.4em;
+    font-style: normal;
+}
+
+.inboxsdk__sidebar .insight_reply_status h3 {
+    margin: .8em 0 .4em;
+}
+
+.inboxsdk__sidebar .insight_reply_status ul, .inboxsdk__sidebar .insight_inner_group ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.inboxsdk__sidebar .insight_reply_status h4 {
+    color: gray;
+    font-size: 1.1em;
+}
+
+.inboxsdk__sidebar .insight_reply_status h4 em {
+    color: black;
+    font-size: 1.1em;
+    font-style: normal;
+}
+
+.inboxsdk__sidebar .insight_inner_group h3, .inboxsdk__sidebar .insight_inner_group h4 {
+    margin: .8em 0 .4em;
+}
+
+.inboxsdk__sidebar .insight_inner_group h3 .insight_toggle {
+    font-size: 1.2em;
+    text-decoration: initial;
+    color: black;
+}

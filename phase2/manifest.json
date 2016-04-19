@@ -1,0 +1,21 @@
+{
+  "name": "Hypha",
+  "description": "Google Chrome extension.",
+  "version": "0.0.0",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://mail.google.com/*",
+        "https://inbox.google.com/*"
+      ],
+      "js": ["lib/inboxsdk.js", "js/content.js"],
+      "css": ["styles/main.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "https://mail.google.com/",
+    "https://inbox.google.com/"
+  ],
+  "manifest_version": 2
+}

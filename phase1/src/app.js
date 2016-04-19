@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Spawn from './spawn';
+import Spawn from '../../src/spawn';
 import { increment, add } from './actions';
 
 class App extends Component {
@@ -23,10 +23,10 @@ class App extends Component {
       <span> </span>
       <input className="btn btn-default" type="button" value="Add Notification" onClick={this.handleAdd.bind(this)} />
 
-      <Spawn to="outside-1">
+      <Spawn to="#outside-1">
         <h2>Outside: {count}</h2>
       </Spawn>
-      <Spawn to="outside-2">
+      <Spawn to="#outside-2">
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
             {button}

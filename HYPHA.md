@@ -21,5 +21,11 @@ Building Chrome extension for Gmail.
 
 ## Naming?
 
+react-spawn
+redux-spawn
 dispax: dispersal
 fungal
+flungal
+flunx
+recoil
+parallux
