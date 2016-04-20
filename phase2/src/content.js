@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -13,8 +14,13 @@ InboxSDK.load('1.0', appId).then(sdk => {
   const body = document.getElementsByTagName('body')[0];
   body.appendChild(container);
 
+  const initial = {
+    app: { sdk },
+    users: {}
+  };
+
   ReactDOM.render(
-    <Provider store={configureStore()}>
+    <Provider store={configureStore(initial)}>
       <div>
         <App />
         <DevTools />

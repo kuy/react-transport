@@ -1,28 +1,40 @@
 import { combineReducers } from 'redux';
 import {
-  INCREMENT
+  REQUEST_FETCH_USER_PRESENCE, SUCCESS_FETCH_USER_PRESENCE, FAILURE_FETCH_USER_PRESENCE
 } from './actions';
 
 const initial = {
-  app: {
-    count: 0,
-  }
+  presence: null,
+  status: 'working',
+  error: false
 };
 
 const handlers = {
-  app: {
-    [INCREMENT]: (state, action) => {
-      return { ...state, count: state.count + 1 };
+  app: {},
+  users: {
+    [REQUEST_FETCH_USER_PRESENCE]: (state, action) => {
+      const { email } = action.payload;
+      return { ...state.users, [email]: { ...initial } };
+    },
+    [SUCCESS_FETCH_USER_PRESENCE]: (state, action) => {
+      const { email, presence } = action.payload;
+      return { ...state.users, [email]: { presence, status: 'done', error: false } };
+    },
+    [FAILURE_FETCH_USER_PRESENCE]: (state, action) => {
+      const { email } = action.payload;
+      return { ...state.users, [email]: { presence, status: 'done', error: true } };
     },
   }
 };
 
-function app(state = initial.app, action) {
-  const handler = handlers.app[action.type];
-  if (!handler) { return state; }
-  return handler(state, action);
+function dispatch(name) {
+  return (state = {}, action) => {
+    const handler = handlers[name][action.type];
+    if (!handler) { return state; }
+    return handler(state, action);
+  };
 }
 
 export default combineReducers(
-  { app }
+  { app: dispatch('app'), users: dispatch('users') }
 );
