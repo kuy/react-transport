@@ -16,14 +16,14 @@ InboxSDK.load('1.0', appId).then(sdk => {
 
   const initial = {
     app: { sdk },
-    users: {}
+    users: {},
+    labels: {},
   };
 
   ReactDOM.render(
     <Provider store={configureStore(initial)}>
       <div>
         <App />
-        <DevTools />
       </div>
     </Provider>,
   container);
