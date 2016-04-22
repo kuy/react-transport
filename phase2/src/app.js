@@ -1,25 +1,33 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Spawn from '../../src/spawn';
-import { increment } from './actions';
+import { Panel, List } from './components';
 
 class App extends Component {
-  handleClick() {
-    this.props.dispatch(increment());
-  }
-
   render() {
-    const { count } = this.props;
-    return <div>
-      <Spawn prepend to='div[role="banner"] > div:first-child > div:first-child > div:first-child'>
-        <h3 onClick={this.handleClick.bind(this)}>Outside: {count}</h3>
-      </Spawn>
-    </div>;
+    const { view, users, panels } = this.props;
+    let content;
+    switch (view.name) {
+      case 'thread':
+        const items = Object.keys(users).map(email => ({ ...users[email], email }));
+        content = <div>
+          {Object.keys(panels.list).map(id =>
+            <Spawn key={id} to={panels.entities[id].el}>
+              <Panel>
+                <List items={items} />
+              </Panel>
+            </Spawn>
+          )}
+        </div>;
+        break;
+    }
+
+    return <div>{content}</div>;
   }
 }
 
-function select({ app }) {
-  return { ...app };
+function select({ view, users, panels }) {
+  return { view, users, panels };
 }
 
 export default connect(select)(App);

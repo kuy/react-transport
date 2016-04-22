@@ -1,29 +1,30 @@
 import { combineReducers } from 'redux';
 import {
-  REGISTER_LABEL, UNREGISTER_LABEL,
-  ADD_USER, REMOVE_USER,
+  CHANGE_VIEW, ADD_USER, REMOVE_USER,
+  REGISTER_PANEL, UNREGISTER_PANEL,
   REQUEST_FETCH_USER_PRESENCE, SUCCESS_FETCH_USER_PRESENCE, FAILURE_FETCH_USER_PRESENCE
 } from './actions';
+import { seqId } from './utils';
 
 const initial = {
   user: {
     presence: null,
     status: '',
     error: false
-  },
-  label: {
-    group: null,
-    el: null,
-    threadId: null,
   }
 };
 
 const handlers = {
   app: {},
+  view: {
+    [CHANGE_VIEW]: (state, action) => {
+      return { ...action.payload };
+    }
+  },
   users: {
     [ADD_USER]: (state, action) => {
-      const { email } = action.payload;
-      return { ...state, [email]: { ...initial.user } };
+      const { name, email } = action.payload;
+      return { ...state, [email]: { ...initial.user, name } };
     },
     [REMOVE_USER]: (state, action) => {
       const { email } = action.payload;
@@ -33,23 +34,27 @@ const handlers = {
     },
     [REQUEST_FETCH_USER_PRESENCE]: (state, action) => {
       const { email } = action.payload;
-      return { ...state, [email]: { ...initial.user, status: 'working' } };
+      return { ...state, [email]: { ...state[email], status: 'working' } };
     },
     [SUCCESS_FETCH_USER_PRESENCE]: (state, action) => {
       const { email, presence } = action.payload;
-      return { ...state, [email]: { presence, status: 'done' } };
+      return { ...state, [email]: { ...state[email], presence, status: 'done', error: false } };
     },
     [FAILURE_FETCH_USER_PRESENCE]: (state, action) => {
       const { email } = action.payload;
-      return { ...state, [email]: { presence, status: 'done', error: true } };
+      return { ...state, [email]: { ...state[email], presence, status: 'done', error: true } };
     },
   },
-  labels: {
-    [REGISTER_LABEL]: (state, action) => {
-      
+  panels: {
+    [REGISTER_PANEL]: (state, action) => {
+      const id = seqId();
+      return {
+        list: [ ...state.list, id ],
+        entities: { ...state.entities, [id]: { ...action.payload } }
+      };
     },
-    [UNREGISTER_LABEL]: (state, action) => {
-      
+    [UNREGISTER_PANEL]: (state, action) => {
+      return state;
     }
   }
 };
@@ -63,5 +68,10 @@ function dispatch(name) {
 }
 
 export default combineReducers(
-  { app: dispatch('app'), users: dispatch('users') }
+  {
+    app: dispatch('app'),
+    view: dispatch('view'),
+    users: dispatch('users'),
+    panels: dispatch('panels'),
+  }
 );

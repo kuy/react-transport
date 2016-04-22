@@ -1,9 +1,12 @@
 import { createAction } from 'redux-actions';
 
-export const REGISTER_LABEL = 'REGISTER_LABEL';
-export const UNREGISTER_LABEL = 'UNREGISTER_LABEL';
-export const registerLabel = createAction(REGISTER_LABEL);
-export const unregisterLabel = createAction(UNREGISTER_LABEL);
+export const CHANGE_VIEW = 'CHANGE_VIEW';
+export const changeView = createAction(CHANGE_VIEW);
+
+export const REGISTER_PANEL = 'REGISTER_PANEL';
+export const UNREGISTER_PANEL = 'UNREGISTER_PANEL';
+export const registerPanel = createAction(REGISTER_PANEL);
+export const unregisterPanel = createAction(UNREGISTER_PANEL);
 
 export const ADD_USER = 'ADD_USER';
 export const REMOVE_USER = 'REMOVE_USER';

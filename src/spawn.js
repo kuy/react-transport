@@ -1,10 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 
 const RETRY_COUNT = 20;
 const RETRY_DURATION = 500;
 
 export default class Spawn extends Component {
+  static get displayName() {
+    return 'Spawn';
+  }
+
+  static get propTypes() {
+    return {
+      to: PropTypes.any.isRequired,
+      replace: PropTypes.bool,
+      prepend: PropTypes.bool,
+      append: PropTypes.bool,
+    };
+  }
+
   constructor(props) {
     super(props);
     const { replace, prepend, append } = props;
@@ -54,7 +67,12 @@ export default class Spawn extends Component {
         console.error("Error: 'to' is required props for Spawn.");
         return;
       }
-      const list = document.querySelectorAll(to);
+      let list;
+      if (typeof to === 'string') {
+        list = document.querySelectorAll(to);
+      } else {
+        list = [to];
+      }
       if (!list || list.length === 0) {
         return this.retry();
       }

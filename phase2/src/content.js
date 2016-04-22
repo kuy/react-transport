@@ -17,7 +17,10 @@ InboxSDK.load('1.0', appId).then(sdk => {
   const initial = {
     app: { sdk },
     users: {},
-    labels: {},
+    panels: {
+      list: [],
+      entities: {},
+    },
   };
 
   ReactDOM.render(
