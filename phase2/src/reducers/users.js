@@ -3,7 +3,10 @@ import {
   REQUEST_FETCH_USER_PRESENCE, SUCCESS_FETCH_USER_PRESENCE, FAILURE_FETCH_USER_PRESENCE
 } from '../actions';
 
-export const initial = {};
+export const initial = {
+  list: [],
+  entities: {}
+};
 
 const base = {
   presence: null,
@@ -14,25 +17,61 @@ const base = {
 const handlers = {
   [ADD_USER]: (state, action) => {
     const { name, email } = action.payload;
-    return { ...state, [email]: { ...base, name } };
+    return {
+      list: [ ...state.list, email ],
+      entities: { ...state.entities, [email]: { ...base, name } }
+    };
   },
   [REMOVE_USER]: (state, action) => {
     const { email } = action.payload;
-    const newState = { ...state };
-    delete newState[email];
+    const newState = {
+      list: state.list.filter(item => item !== email),
+      entities: { ...state.entities }
+    };
+    delete newState.entities[email];
     return newState;
   },
   [REQUEST_FETCH_USER_PRESENCE]: (state, action) => {
     const { email } = action.payload;
-    return { ...state, [email]: { ...state[email], status: 'working' } };
+    return {
+      ...state,
+      entities: {
+        ...state.entities,
+        [email]: {
+          ...state.entities[email],
+          status: 'working'
+        }
+      }
+    };
   },
   [SUCCESS_FETCH_USER_PRESENCE]: (state, action) => {
     const { email, presence } = action.payload;
-    return { ...state, [email]: { ...state[email], presence, status: 'done', error: false } };
+    return {
+      ...state,
+      entities: {
+        ...state.entities,
+        [email]: {
+          ...state.entities[email],
+          presence,
+          status: 'done',
+          error: false
+        }
+      }
+    };
   },
   [FAILURE_FETCH_USER_PRESENCE]: (state, action) => {
     const { email } = action.payload;
-    return { ...state, [email]: { ...state[email], presence, status: 'done', error: true } };
+    return {
+      ...state,
+      entities: {
+        ...state.entities,
+        [email]: {
+          ...state.entities[email],
+          status: 'done',
+          error: true
+        }
+      }
+    };
   }
 };
 

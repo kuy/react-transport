@@ -40,7 +40,7 @@ function* hookThreadRowView() {
 
     // NOTE: Pickup some emails randomly because we don't have any backends.
     const users = yield select(state => state.users);
-    if (Object.keys(users).length < 5 && Math.random() < 0.5) {
+    if (users.list.length < 5 && Math.random() < 0.5) {
       const contact = threadRowView.getContacts()[0];
       yield put(actions.addUser({ name: contact.name, email: contact.emailAddress }));
     }
@@ -98,7 +98,7 @@ function* triggerRequestUserPresence() {
     const { payload: { name, id } } = yield take(actions.CHANGE_VIEW);
     if (name === 'thread') {
       const users = yield select(state => state.users);
-      for (let email of Object.keys(users)) {
+      for (let email of users.list) {
         yield put(actions.requestFetchUserPresence({ email }));
       }
     }

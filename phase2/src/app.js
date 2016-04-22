@@ -9,7 +9,7 @@ class App extends Component {
     let content;
     switch (view.name) {
       case 'thread':
-        const items = Object.keys(users).map(email => ({ ...users[email], email }));
+        const items = users.list.map(email => ({ ...users.entities[email], email }));
         content = <div>
           {Object.keys(panels.list).map(id =>
             <Spawn key={id} to={panels.entities[id].el}>
