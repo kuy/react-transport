@@ -4,7 +4,7 @@ import { take, fork, put, call } from 'redux-saga/effects';
 import { handleRequestUserPresence, runRequestUserPresence, fetchUserPresence } from '../../src/sagas';
 import * as actions from '../../src/actions';
 
-describe('handleRequestUserPresence', () => {
+describe('Sagas > handleRequestUserPresence', () => {
   it('waits action and forks a process', () => {
     const saga = handleRequestUserPresence();
 
@@ -19,7 +19,7 @@ describe('handleRequestUserPresence', () => {
   });
 });
 
-describe('runRequestUserPresence', () => {
+describe('Sagas > runRequestUserPresence', () => {
   it('initiates API call and sends success action', () => {
     const saga = runRequestUserPresence('ok@example.com');
 

@@ -7,12 +7,16 @@ function color(presence) {
 export default class List extends Component {
   render() {
     const { items } = this.props;
-    return <ul>
-      {items.map((item, i) =>
-        <li key={i + item.email} style={{ color: color(item.presence) }}>
-          <span title={item.email}>{item.name}</span>: {item.presence}
-        </li>
-      )}
-    </ul>;
+    if (items && 0 < items.length) {
+      return <ul>
+        {items.map((item, i) =>
+          <li key={i + item.email} style={{ color: color(item.presence) }}>
+            <span title={item.email}>{item.name}</span>: {item.presence}
+          </li>
+        )}
+      </ul>;
+    } else {
+      return <div>No members in this thread</div>;
+    }
   }
 }

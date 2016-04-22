@@ -38,10 +38,9 @@ function* hookThreadRowView() {
   while (true) {
     const threadRowView = yield call([queue, queue.pull]);
 
-    // NOTE: Pickup some emails randomly because we don't have any backends.
+    // NOTE: Pickup emails from list view because we don't have any backends.
     const users = yield select(state => state.users);
-    if (users.list.length < 5 && Math.random() < 0.5) {
-      const contact = threadRowView.getContacts()[0];
+    for (let contact of threadRowView.getContacts()) {
       yield put(actions.addUser({ name: contact.name, email: contact.emailAddress }));
     }
   }
@@ -84,12 +83,22 @@ function* hookMessageView() {
   const { sdk } = yield select(state => state.app);
   const queue = new Queue();
 
-  sdk.Conversations.registerMessageViewHandler(messageView => {
-    queue.push(messageView);
+  sdk.Conversations.registerMessageViewHandlerAll(messageView => {
+    if (messageView.isLoaded()) {
+      queue.push(messageView);
+    } else {
+      messageView.on('load', () => {
+        queue.push(messageView);
+      });
+    }
   });
 
   while (true) {
     const messageView = yield call([queue, queue.pull]);
+    const contacts = [messageView.getSender(), ...messageView.getRecipients()];
+    for (let contact of contacts) {
+      yield put(actions.showUser({ email: contact.emailAddress }));
+    }
   }
 }
 
@@ -105,10 +114,20 @@ function* triggerRequestUserPresence() {
   }
 }
 
+function* triggerHideAllUsers() {
+  while (true) {
+    const { payload: { name } } = yield take(actions.CHANGE_VIEW);
+    if (name === 'list') {
+      yield put(actions.hideAllUsers());
+    }
+  }
+}
+
 export default function* rootSaga() {
   yield fork(handleRequestUserPresence);
   yield fork(hookThreadRowView);
   yield fork(hookThreadView);
   yield fork(hookMessageView);
   yield fork(triggerRequestUserPresence);
+  yield fork(triggerHideAllUsers);
 };

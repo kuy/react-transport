@@ -2,9 +2,10 @@ import assert from 'power-assert';
 import reducer from '../../src/reducers/users';
 import * as actions from '../../src/actions';
 
-describe('reducer', () => {
+describe('Reducers > users', () => {
   it('returns default state', () => {
     assert.deepEqual(reducer(undefined, { type: '' }), {
+      show: [],
       list: [],
       entities: {}
     });
@@ -13,6 +14,7 @@ describe('reducer', () => {
   it('adds a user', () => {
     let state = reducer(undefined, actions.addUser({ name: 'OK', email: 'ok@example.com' }));
     assert.deepEqual(state, {
+      show: [],
       list: ['ok@example.com'],
       entities: {
         'ok@example.com': {
@@ -26,6 +28,7 @@ describe('reducer', () => {
 
     state = reducer(state, actions.addUser({ name: 'NG', email: 'ng@example.com' }));
     assert.deepEqual(state, {
+      show: [],
       list: ['ok@example.com', 'ng@example.com'],
       entities: {
         'ok@example.com': {
@@ -46,6 +49,7 @@ describe('reducer', () => {
 
   it('ignores adding duplicated users', () => {
     let state = {
+      show: [],
       list: ['ok@example.com'],
       entities: {
         'ok@example.com': {
@@ -60,6 +64,7 @@ describe('reducer', () => {
     state = reducer(state, actions.addUser({ name: 'OK', email: 'ok@example.com' }));
 
     assert.deepEqual(state, {
+      show: [],
       list: ['ok@example.com'],
       entities: {
         'ok@example.com': {
