@@ -102,23 +102,19 @@ function* hookMessageView() {
   }
 }
 
-function* triggerRequestUserPresence() {
-  while (true) {
-    const { payload: { name, id } } = yield take(actions.CHANGE_VIEW);
-    if (name === 'thread') {
-      const users = yield select(state => state.users);
-      for (let email of users.list) {
-        yield put(actions.requestFetchUserPresence({ email }));
-      }
-    }
-  }
-}
-
-function* triggerHideAllUsers() {
+function* watchViewChange() {
   while (true) {
     const { payload: { name } } = yield take(actions.CHANGE_VIEW);
-    if (name === 'list') {
-      yield put(actions.hideAllUsers());
+    switch (name) {
+      case 'list':
+        yield put(actions.hideAllUsers());
+        break;
+      case 'thread':
+        const users = yield select(state => state.users);
+        for (let email of users.list) {
+          yield put(actions.requestFetchUserPresence({ email }));
+        }
+        break;
     }
   }
 }
@@ -128,6 +124,5 @@ export default function* rootSaga() {
   yield fork(hookThreadRowView);
   yield fork(hookThreadView);
   yield fork(hookMessageView);
-  yield fork(triggerRequestUserPresence);
-  yield fork(triggerHideAllUsers);
+  yield fork(watchViewChange);
 };
