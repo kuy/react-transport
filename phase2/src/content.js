@@ -6,6 +6,7 @@ import App from './app';
 import configureStore from './store';
 import DevTools from './dev-tools';
 import appId from './inboxsdk-app-id';
+import { initial } from './reducers';
 
 InboxSDK.load('1.0', appId).then(sdk => {
 
@@ -14,17 +15,9 @@ InboxSDK.load('1.0', appId).then(sdk => {
   const body = document.getElementsByTagName('body')[0];
   body.appendChild(container);
 
-  const initial = {
-    app: { sdk },
-    users: {},
-    panels: {
-      list: [],
-      entities: {},
-    },
-  };
-
+  const state = { ...initial, app: { sdk } };
   ReactDOM.render(
-    <Provider store={configureStore(initial)}>
+    <Provider store={configureStore(state)}>
       <div>
         <App />
       </div>
