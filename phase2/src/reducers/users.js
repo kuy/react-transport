@@ -17,6 +17,9 @@ const base = {
 const handlers = {
   [ADD_USER]: (state, action) => {
     const { name, email } = action.payload;
+    if (state.list.indexOf(email) !== -1) {
+      return state; // dedup
+    }
     return {
       list: [ ...state.list, email ],
       entities: { ...state.entities, [email]: { ...base, name } }

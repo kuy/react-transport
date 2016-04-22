@@ -2,7 +2,7 @@ import { take, put, call, fork, select } from 'redux-saga/effects';
 import * as actions from './actions';
 import { Queue } from './utils';
 
-function fetchUserPresence(email) {
+export function fetchUserPresence(email) {
   // NOTE: Fake API call
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -11,7 +11,7 @@ function fetchUserPresence(email) {
   });
 }
 
-function* singleRequestUserPresence(email) {
+export function* runRequestUserPresence(email) {
   const { data, error } = yield call(fetchUserPresence, email);
   if (data && !error) {
     yield put(actions.successFetchUserPresence(data));
@@ -20,10 +20,10 @@ function* singleRequestUserPresence(email) {
   }
 }
 
-function* handleRequestUserPresence() {
+export function* handleRequestUserPresence() {
   while (true) {
     const { payload: { email } } = yield take(actions.REQUEST_FETCH_USER_PRESENCE);
-    yield fork(singleRequestUserPresence, email);
+    yield fork(runRequestUserPresence, email);
   }
 }
 

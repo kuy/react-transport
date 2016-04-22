@@ -11,7 +11,55 @@ describe('reducer', () => {
   });
 
   it('adds a user', () => {
-    assert.deepEqual(reducer(undefined, actions.addUser({ name: 'OK', email: 'ok@example.com' })), {
+    let state = reducer(undefined, actions.addUser({ name: 'OK', email: 'ok@example.com' }));
+    assert.deepEqual(state, {
+      list: ['ok@example.com'],
+      entities: {
+        'ok@example.com': {
+          name: 'OK',
+          presence: null,
+          status: '',
+          error: false
+        }
+      }
+    });
+
+    state = reducer(state, actions.addUser({ name: 'NG', email: 'ng@example.com' }));
+    assert.deepEqual(state, {
+      list: ['ok@example.com', 'ng@example.com'],
+      entities: {
+        'ok@example.com': {
+          name: 'OK',
+          presence: null,
+          status: '',
+          error: false
+        },
+        'ng@example.com': {
+          name: 'NG',
+          presence: null,
+          status: '',
+          error: false
+        }
+      }
+    });
+  });
+
+  it('ignores adding duplicated users', () => {
+    let state = {
+      list: ['ok@example.com'],
+      entities: {
+        'ok@example.com': {
+          name: 'OK',
+          presence: null,
+          status: '',
+          error: false
+        }
+      }
+    };
+
+    state = reducer(state, actions.addUser({ name: 'OK', email: 'ok@example.com' }));
+
+    assert.deepEqual(state, {
       list: ['ok@example.com'],
       entities: {
         'ok@example.com': {
@@ -36,9 +84,38 @@ describe('reducer', () => {
         }
       }
     };
+
     assert.deepEqual(reducer(state, actions.removeUser({ email: 'ng@example.com' })), {
       list: [],
       entities: {}
+    });
+  });
+
+  it('ignores removing missing users', () => {
+    let state = {
+      list: ['ok@example.com'],
+      entities: {
+        'ok@example.com': {
+          name: 'OK',
+          presence: null,
+          status: '',
+          error: false
+        }
+      }
+    };
+
+    state = reducer(state, actions.removeUser({ name: 'NG', email: 'ng@example.com' }));
+
+    assert.deepEqual(state, {
+      list: ['ok@example.com'],
+      entities: {
+        'ok@example.com': {
+          name: 'OK',
+          presence: null,
+          status: '',
+          error: false
+        }
+      }
     });
   });
 });
