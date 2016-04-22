@@ -65,7 +65,7 @@ function* hookThreadView() {
     yield put(actions.changeView({ name: 'thread', id }));
 
     const el = document.createElement('div');
-    el.setAttribute('id', `hypha-panel-${id}`);
+    el.setAttribute('id', `react-transport-panel-${id}`);
 
     threadView.addSidebarContentPanel({
       el, title: 'Slack members'

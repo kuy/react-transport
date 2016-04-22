@@ -1,3 +1,3 @@
-# hypha-sandbox
+# react-transport
 
-A playground to explore a Flux archtecture which allows multiple rendering entry points.
+Transports your React component to the outside of React rendering tree.

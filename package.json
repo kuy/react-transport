@@ -1,10 +1,13 @@
 {
-  "name": "hypha",
+  "name": "react-transport",
+  "version": "0.1.0",
+  "description": "Transports your React component to the outside of React rendering tree.",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kuy/hypha.git"
+    "url": "https://github.com/kuy/react-transport.git"
   },
-  "homepage": "https://github.com/kuy/hypha",
+  "homepage": "https://github.com/kuy/react-transport",
   "scripts": {
     "phase1": "./node_modules/.bin/webpack-dev-server --config phase1/webpack.config.js --progress --color --content-base phase1/public/",
     "phase2": "./node_modules/.bin/webpack --config phase2/webpack.config.js --watch",
@@ -14,17 +17,12 @@
     "Yuki Kodama <endflow.net@gmail.com>"
   ],
   "license": "MIT",
-  "dependencies": {
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1",
-    "react-redux": "^4.4.5",
-    "redux": "^3.5.1",
-    "redux-actions": "^0.9.1",
-    "redux-saga": "^0.9.5"
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.7.5",
-    "babel-core": "^6.7.6",
+    "babel-cli": "^6.7.7",
+    "babel-core": "^6.7.7",
     "babel-loader": "^6.2.4",
     "babel-plugin-unassert": "^2.0.1",
     "babel-polyfill": "^6.7.4",
@@ -35,10 +33,15 @@
     "babel-register": "^6.7.2",
     "mocha": "^2.4.5",
     "power-assert": "^1.3.1",
+    "react-dom": "^15.0.0",
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.1",
+    "redux-actions": "^0.9.1",
     "redux-devtools": "^3.2.0",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.0.11",
     "redux-logger": "^2.6.1",
+    "redux-saga": "^0.9.5",
     "sinon": "^1.17.3",
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1"

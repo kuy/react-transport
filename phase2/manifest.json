@@ -1,7 +1,7 @@
 {
-  "name": "Hypha",
-  "description": "Google Chrome extension.",
-  "version": "0.0.0",
+  "name": "react-transport",
+  "description": "Google Chrome extension for demo of react-transport.",
+  "version": "0.1.0",
   "content_scripts": [
     {
       "matches": [

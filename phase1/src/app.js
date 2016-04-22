@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Spawn from '../../src/spawn';
+import Transport from '../../src/transport';
 import { increment, add } from './actions';
 
 class App extends Component {
@@ -23,10 +23,10 @@ class App extends Component {
       <span> </span>
       <input className="btn btn-default" type="button" value="Add Notification" onClick={this.handleAdd.bind(this)} />
 
-      <Spawn to="#outside-1">
+      <Transport to="#outside-1">
         <h2>Outside: {count}</h2>
-      </Spawn>
-      <Spawn to="#outside-2">
+      </Transport>
+      <Transport to="#outside-2">
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
             {button}
@@ -39,7 +39,7 @@ class App extends Component {
             </ul>
           </li>
         </ul>
-      </Spawn>
+      </Transport>
     </div>;
   }
 }

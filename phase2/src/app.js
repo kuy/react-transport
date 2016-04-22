@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Spawn from '../../src/spawn';
+import Transport from '../../src/transport';
 import { Panel, List } from './components';
 
 class App extends Component {
@@ -12,11 +12,11 @@ class App extends Component {
         const items = users.show.map(email => ({ ...users.entities[email], email }));
         content = <div>
           {Object.keys(panels.list).map(id =>
-            <Spawn key={id} to={panels.entities[id].el}>
+            <Transport key={id} to={panels.entities[id].el}>
               <Panel>
                 <List items={items} />
               </Panel>
-            </Spawn>
+            </Transport>
           )}
         </div>;
         break;

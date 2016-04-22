@@ -11,7 +11,7 @@ import { initial } from './reducers';
 InboxSDK.load('1.0', appId).then(sdk => {
 
   const container = document.createElement('div');
-  container.setAttribute('id', 'hypha-app');
+  container.setAttribute('id', 'react-transport-app');
   const body = document.getElementsByTagName('body')[0];
   body.appendChild(container);
 

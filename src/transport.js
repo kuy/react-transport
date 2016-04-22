@@ -4,13 +4,14 @@ import ReactDOM from 'react-dom';
 const RETRY_COUNT = 20;
 const RETRY_DURATION = 500;
 
-export default class Spawn extends Component {
+export default class Transport extends Component {
   static get displayName() {
-    return 'Spawn';
+    return 'Transport';
   }
 
   static get propTypes() {
     return {
+      children: PropTypes.any.isRequired,
       to: PropTypes.any.isRequired,
       replace: PropTypes.bool,
       prepend: PropTypes.bool,
@@ -56,7 +57,7 @@ export default class Spawn extends Component {
     }
     const { children } = props;
     if (typeof children === 'undefined') {
-      console.error("Error: 'children' is required props for Spawn.");
+      console.error("Error: 'children' is required props for <Transport> component.");
       return;
     }
 
@@ -64,7 +65,7 @@ export default class Spawn extends Component {
       // Find reference element
       const { to } = this.props;
       if (typeof to === 'undefined') {
-        console.error("Error: 'to' is required props for Spawn.");
+        console.error("Error: 'to' is required props for <Transport> component.");
         return;
       }
       let list;
