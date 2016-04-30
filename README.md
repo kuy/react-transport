@@ -2,7 +2,7 @@
 
 Transports your React component to the outside of React rendering tree.
 
-![phase1][https://raw.githubusercontent.com/kuy/react-transport/master/images/phase1.png]
+![phase1](https://raw.githubusercontent.com/kuy/react-transport/master/images/phase1.png)
 
 ## NOTE: Unstable
 
@@ -50,9 +50,9 @@ Shows online status of Slack members in Gmail.
 npm run phase2
 ```
 
-![phase2-1][https://raw.githubusercontent.com/kuy/react-transport/master/images/phase2-01.png]
+![phase2-1](https://raw.githubusercontent.com/kuy/react-transport/master/images/phase2-01.png)
 
-![phase2-2][https://raw.githubusercontent.com/kuy/react-transport/master/images/phase2-02.png]
+![phase2-2](https://raw.githubusercontent.com/kuy/react-transport/master/images/phase2-02.png)
 
 ## API
 
