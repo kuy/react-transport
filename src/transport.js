@@ -16,6 +16,15 @@ export default class Transport extends Component {
       replace: PropTypes.bool,
       prepend: PropTypes.bool,
       append: PropTypes.bool,
+      wrapBy: PropTypes.oneOfType([
+        PropTypes.func, PropTypes.string
+      ]),
+    };
+  }
+
+  static get defaultProps() {
+    return {
+      wrapBy: 'div'
     };
   }
 
@@ -62,12 +71,13 @@ export default class Transport extends Component {
     }
 
     if (typeof this.mount.container === 'undefined') {
-      // Find reference element
+      // Determine reference element
       const { to } = this.props;
       if (typeof to === 'undefined') {
         console.error("Error: 'to' is required props for <Transport> component.");
         return;
       }
+
       let list;
       if (typeof to === 'string') {
         list = document.querySelectorAll(to);
@@ -80,28 +90,42 @@ export default class Transport extends Component {
       if (list.length !== 1) {
         console.warn('Warning: Query result has multiple DOM elements. We continue by using first element.');
       }
+      const ref = list[0];
 
       // Setup parent element
-      const { prepend, append } = this.props;
-      const el = list[0];
+      const { prepend, append, replace } = this.props;
+
       if (prepend) {
         this.mount.container = document.createElement('div');
-        if (el.hasChildNodes()) {
-          el.insertBefore(this.mount.container, el.childNodes[0]);
+        if (ref.hasChildNodes()) {
+          ref.insertBefore(this.mount.container, ref.childNodes[0]);
         } else {
-          el.appendChild(this.mount.container);
+          ref.appendChild(this.mount.container);
         }
       } else if (append) {
         this.mount.container = document.createElement('div');
-        el.appendChild(this.mount.container);
+        ref.appendChild(this.mount.container);
       } else {
-        this.mount.container = el;
+        this.mount.container = ref;
       }
     }
 
-    ReactDOM.unstable_renderSubtreeIntoContainer(this, (
-      <div>{children}</div>
-    ), this.mount.container, () => this.done());
+    let body;
+    let { wrapBy } = props;
+    switch (typeof wrapBy) {
+      case 'string':
+        body = React.createElement(wrapBy, null, children);
+        break;
+      case 'function':
+        body = wrapBy(children);
+        break;
+      default:
+        throw `ERROR: 'wrapBy' should be string or function`
+    }
+
+    ReactDOM.unstable_renderSubtreeIntoContainer(
+      this, body, this.mount.container, () => this.done()
+    );
   }
 
   render() {

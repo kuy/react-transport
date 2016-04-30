@@ -12,6 +12,10 @@ class App extends Component {
     this.props.dispatch(add());
   }
 
+  createWrapper(children) {
+    return <li className="dropdown">{children}</li>;
+  }
+
   render() {
     const { count, notification } = this.props;
     const button = 0 < notification.length
@@ -26,19 +30,20 @@ class App extends Component {
       <Transport to="#outside-1">
         <h2>Outside: {count}</h2>
       </Transport>
-      <Transport to="#outside-2">
-        <ul className="nav navbar-nav navbar-right">
-          <li className="dropdown">
-            {button}
-            <ul className="dropdown-menu">
-              {notification.map((item, i) =>
-                <li key={i}><a href="#">{item}</a></li>
-              )}
-              <li key="d" role="separator" className="divider"></li>
-              <li key="a"><a href="#">View all</a></li>
-            </ul>
-          </li>
+
+      <Transport replace to="#outside-2" wrapBy={this.createWrapper}>
+        {button}
+        <ul className="dropdown-menu">
+          {notification.map((item, i) =>
+            <li key={i}><a href="#">{item}</a></li>
+          )}
+          <li key="d" role="separator" className="divider"></li>
+          <li key="a"><a href="#">View all</a></li>
         </ul>
+      </Transport>
+
+      <Transport replace to="#outside-3" wrapBy={this.createWrapper}>
+        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-envelope glyphicon-white" aria-hidden="true"></span> <span className="badge" style={{ marginTop: '-3px', marginBottom: '3px' }}>{count}</span></a>
       </Transport>
     </div>;
   }

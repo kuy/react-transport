@@ -1,9 +1,12 @@
 import 'babel-polyfill';
 import assert from 'power-assert';
-import sinon from 'sinon';
+import td from 'testdouble';
+import timers from 'testdouble-timers';
 import { take, fork, put, call } from 'redux-saga/effects';
 import { handleRequestUserPresence, runRequestUserPresence, fetchUserPresence } from '../../src/sagas';
 import * as actions from '../../src/actions';
+
+timers.use(td);
 
 describe('Sagas > handleRequestUserPresence', () => {
   it('waits action and forks a process', () => {
@@ -50,7 +53,8 @@ describe('Sagas > runRequestUserPresence', () => {
 
 describe('Sagas > fetchUserPresence', () => {
   it('returns Promise and fake response later', () => {
-    const clock = sinon.useFakeTimers();
+    // const clock = sinon.useFakeTimers();
+    const clock = td.timers();
 
     const request = fetchUserPresence('ok@example.com').then(data => {
       const { data: { email } } = data;
