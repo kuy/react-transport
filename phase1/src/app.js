@@ -43,7 +43,10 @@ class App extends Component {
       </Transport>
 
       <Transport replace to="#outside-3" wrapBy={this.createWrapper}>
-        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span className="glyphicon glyphicon-envelope glyphicon-white" aria-hidden="true"></span> <span className="badge" style={{ marginTop: '-3px', marginBottom: '3px' }}>{count}</span></a>
+        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+          <span className="glyphicon glyphicon-envelope glyphicon-white" aria-hidden="true"></span>
+          <span className="badge" style={{ margin: '-3px 0 3px 6px' }}>{count}</span>
+        </a>
       </Transport>
     </div>;
   }

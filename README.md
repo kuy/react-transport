@@ -2,6 +2,9 @@
 
 Transports your React component to the outside of React rendering tree.
 
+## NOTE: Unstable
+
+This package is not stable. The API will be changed frequently. I don't recommend use in production.
 
 ## Usage
 
@@ -26,9 +29,9 @@ class MyComponent extends React.Component {
 
 ## API
 
-`react-transport` provides `<Transport>` component.
+`react-transport` provides `<Transport />` component.
 
-### `<Transport>`
+### `<Transport />`
 
 #### `to`: string | HTMLElement [Required]
 
@@ -39,19 +42,41 @@ The (real) HTML element is also acceptable.
 
 This is a default behavior of transportation.
 
-#### `append`: bool
+##### HTML and JSX
 
-Please use this when you want to insert your React component to the end of the destination.
-
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside" />
+</body>
 ```
+
+```jsx
 <Transport append to="#outside">
   <span>Hello</span>
 </Transport>
 ```
 
-If you have following HTML,
+##### Result
 
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside">
+    <div>
+      <span>Hello</span>
+    </div>
+  </div>
+</body>
 ```
+
+#### `append`: bool
+
+Please use this when you want to insert your React component to the end of the destination.
+
+##### HTML and JSX
+
+```html
 <body>
   <h1>React</h1>
   <div id="outside">
@@ -60,9 +85,15 @@ If you have following HTML,
 </body>
 ```
 
-wrapped component will be inserted like this.
-
+```jsx
+<Transport append to="#outside">
+  <span>Hello</span>
+</Transport>
 ```
+
+##### Result
+
+```html
 <body>
   <h1>React</h1>
   <div id="outside">
@@ -74,15 +105,108 @@ wrapped component will be inserted like this.
 </body>
 ```
 
-
 #### `prepend`: bool
 
+##### HTML and JSX
+
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside">
+    <p>Bla Bla Bla</p>
+  </div>
+</body>
 ```
+
+```jsx
 <Transport prepend to="#outside">
   <span>Hello</span>
 </Transport>
 ```
 
+##### Result
+
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside">
+    <div>
+      <span>Hello</span>
+    </div>
+    <p>Bla Bla Bla</p>
+  </div>
+</body>
+```
+
+#### `wrapBy`: string | function
+
+You can change wrapper element by using this option. In default, your component is wrapped with `div` tag.
+
+##### HTML and JSX
+
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside" />
+</body>
+```
+
+```jsx
+<Transport to="#outside" wrapBy="ul">
+  <li>Hello</li>
+  <li>World</li>
+</Transport>
+```
+
+##### Result
+
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside">
+    <ul>
+      <li>Hello</li>
+      <li>World</li>
+    </ul>
+  </div>
+</body>
+```
+
+If you pass a function, it will call with `children` as first argument.
+
+##### HTML and JSX
+
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside" />
+</body>
+```
+
+```jsx
+<Transport to="#outside" wrapBy={children => <ul className="dropdown" onClick={this.handleClick}>{children}</ul>}>
+  <li>Hello</li>
+  <li>World</li>
+</Transport>
+```
+
+##### Result
+
+```html
+<body>
+  <h1>React</h1>
+  <div id="outside">
+    <ul class="dropdown">
+      <li>Hello</li>
+      <li>World</li>
+    </ul>
+  </div>
+</body>
+```
+
+## Caveat
+
+`<Transport />` component doesn't work for server-side rendering.
 
 ## Author
 

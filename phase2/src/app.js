@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Transport from '../../src/transport';
+import { Tooltip, Origin } from 'redux-tooltip';
 import { Panel, List } from './components';
 
 class App extends Component {
@@ -22,7 +23,15 @@ class App extends Component {
         break;
     }
 
-    return <div>{content}</div>;
+    return <div>
+      <Transport prepend to='div[role="banner"] > div:first-child > div:first-child > div:first-child'>
+        <Origin>Slack</Origin>
+      </Transport>
+      {content}
+      <Tooltip place="bottom">
+        <List items={users.list.map(email => ({ ...users.entities[email], email }))} />
+      </Tooltip>
+    </div>;
   }
 }
 

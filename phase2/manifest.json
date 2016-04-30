@@ -1,7 +1,7 @@
 {
   "name": "react-transport",
-  "description": "Google Chrome extension for demo of react-transport.",
-  "version": "0.1.0",
+  "description": "Example Chrome extension for react-transport.",
+  "version": "0.0.1",
   "content_scripts": [
     {
       "matches": [

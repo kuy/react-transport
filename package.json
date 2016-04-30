@@ -42,6 +42,7 @@
     "redux-devtools-log-monitor": "^1.0.11",
     "redux-logger": "^2.6.1",
     "redux-saga": "^0.9.5",
+    "redux-tooltip": "^0.5.4",
     "testdouble": "^1.4.2",
     "testdouble-timers": "0.0.1",
     "webpack": "^1.13.0",
