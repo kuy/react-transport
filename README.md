@@ -26,7 +26,6 @@ class MyComponent extends React.Component {
 }
 ```
 
-
 ## API
 
 `react-transport` provides `<Transport />` component.
