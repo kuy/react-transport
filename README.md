@@ -2,9 +2,9 @@
 
 Transports your React component to the outside of React rendering tree.
 
-![phase1](https://raw.githubusercontent.com/kuy/react-transport/master/images/phase1.png)
+![bootstrap](https://raw.githubusercontent.com/kuy/react-transport/master/images/bootstrap.png)
 
-## NOTE: Unstable
+## Unstable
 
 This package is not stable. The API will be changed frequently. I don't recommend use in production.
 
@@ -34,25 +34,25 @@ class MyComponent extends React.Component {
 npm install
 ```
 
-### Example 1: Bootstrap
+### Bootstrap
 
 Renders React components to detached DOM tree.
 
 ```
-npm run phase1
+npm run bootstrap
 ```
 
-### Example 2: Chrome extension for Gmail
+### Chrome extension for Gmail
 
 Shows online status of Slack members in Gmail.
 
 ```
-npm run phase2
+npm run gmail
 ```
 
-![phase2-1](https://raw.githubusercontent.com/kuy/react-transport/master/images/phase2-01.png)
+![gmail-1](https://raw.githubusercontent.com/kuy/react-transport/master/images/gmail-01.png)
 
-![phase2-2](https://raw.githubusercontent.com/kuy/react-transport/master/images/phase2-02.png)
+![gmail-2](https://raw.githubusercontent.com/kuy/react-transport/master/images/gmail-02.png)
 
 ## API
 

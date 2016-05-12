@@ -9,9 +9,9 @@
   },
   "homepage": "https://github.com/kuy/react-transport",
   "scripts": {
-    "phase1": "./node_modules/.bin/webpack-dev-server --config phase1/webpack.config.js --progress --color --content-base phase1/public/",
-    "phase2": "./node_modules/.bin/webpack --config phase2/webpack.config.js --watch",
-    "test:phase2": "./node_modules/.bin/mocha --compilers js:babel-register --recursive phase2/test/*/*.js"
+    "bootstrap": "./node_modules/.bin/webpack-dev-server --config examples/bootstrap/webpack.config.js --progress --color --content-base examples/bootstrap/public/",
+    "gmail": "./node_modules/.bin/webpack --config examples/gmail/webpack.config.js --watch",
+    "test:gmail": "./node_modules/.bin/mocha --compilers js:babel-register --recursive examples/gmail/test/*/*.js"
   },
   "authors": [
     "Yuki Kodama <endflow.net@gmail.com>"

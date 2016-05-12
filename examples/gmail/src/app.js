@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Transport from '../../src/transport';
+import Transport from '../../../src/transport';
 import { Tooltip, Origin } from 'redux-tooltip';
 import { Panel, List } from './components';
 

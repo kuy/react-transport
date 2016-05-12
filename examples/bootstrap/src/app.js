@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Transport from '../../src/transport';
+import Transport from '../../../src/transport';
 import { increment, add } from './actions';
 
 class App extends Component {
