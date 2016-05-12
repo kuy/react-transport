@@ -1,5 +1,6 @@
 node_modules
 bundle.js
+lib
 *.log
 inboxsdk-app-id.js
 examples/gmail/js/content.js

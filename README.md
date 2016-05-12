@@ -54,6 +54,12 @@ npm run gmail
 
 ![gmail-2](https://raw.githubusercontent.com/kuy/react-transport/master/images/gmail-02.png)
 
+#### Run test
+
+```
+npm run test:gmail
+```
+
 ## API
 
 `react-transport` provides `<Transport />` component.

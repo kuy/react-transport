@@ -2,6 +2,14 @@
   "name": "react-transport",
   "version": "0.0.1",
   "description": "Transports your React component to the outside of React rendering tree.",
+  "keywords": [
+    "react",
+    "transport",
+    "portal",
+    "dom",
+    "render",
+    "tree"
+  ],
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
@@ -9,6 +17,9 @@
   },
   "homepage": "https://github.com/kuy/react-transport",
   "scripts": {
+    "build": "./node_modules/.bin/babel src --out-dir lib",
+    "clean": "./node_modules/.bin/rimraf lib",
+    "prepublish": "npm run clean && npm run build",
     "bootstrap": "./node_modules/.bin/webpack-dev-server --config examples/bootstrap/webpack.config.js --progress --color --content-base examples/bootstrap/public/",
     "gmail": "./node_modules/.bin/webpack --config examples/gmail/webpack.config.js --watch",
     "test:gmail": "./node_modules/.bin/mocha --compilers js:babel-register --recursive examples/gmail/test/*/*.js"
@@ -43,6 +54,7 @@
     "redux-logger": "^2.6.1",
     "redux-saga": "^0.10.2",
     "redux-tooltip": "^0.5.4",
+    "rimraf": "^2.5.2",
     "testdouble": "^1.4.2",
     "testdouble-timers": "0.1.0",
     "webpack": "^1.13.0",
