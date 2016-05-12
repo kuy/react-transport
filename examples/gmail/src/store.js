@@ -6,15 +6,18 @@ import saga from './sagas';
 import logger from 'redux-logger';
 
 export default function configureStore(initialState) {
-  return createStore(
+  const sagaMiddleware = createSagaMiddleware();
+  const store = createStore(
     reducer,
     initialState,
     compose(
       applyMiddleware(
-        createSagaMiddleware(saga),
+        sagaMiddleware,
         logger()
       ),
       DevTools.instrument()
     )
   );
+  sagaMiddleware.run(saga);
+  return store;
 }
